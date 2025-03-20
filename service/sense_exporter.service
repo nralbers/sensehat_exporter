@@ -1,0 +1,19 @@
+[Unit]
+Description=Run gunicorn sense_hat exporter
+After=network.target
+
+[Service]
+User=$user
+Group=$group
+WorkingDirectory=/opt/sensehat_exporter
+Environment="TEMPERATURE_CALIBRATION=0.0"
+Environment="PRESSURE_CALIBRATION=0.0"
+Environment="HUMIDITY_CALIBRATION=0.0"
+ExecStart=gunicorn sensehat_exporter.exporter:app
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

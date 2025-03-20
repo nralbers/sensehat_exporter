@@ -1,6 +1,8 @@
 import asyncio
 import logging
 import math
+import os
+import subprocess
 from collections import namedtuple
 from enum import Enum, StrEnum, auto
 
@@ -12,7 +14,23 @@ from sense_hat import ACTION_RELEASED, InputEvent, SenseHat
 
 logger = logging.getLogger("uvicorn.error")
 
+# Create single instance of sensehat object
+sense = SenseHat()
 
+# SETTINGS
+TEMPERATURE_CALIBRATION = float(os.environ.get("TEMPERATURE_CALIBRATION", "0.0"))
+PRESSURE_CALIBRATION = float(os.environ.get("PRESSURE_CALIBRATION", "0.0"))
+HUMIDITY_CALIBRATION = float(os.environ.get("HUMIDITY_CALIBRATION", "0.0"))
+VERSION = "v1.0.0"
+
+# Git stats for current project
+def get_git_revision_hash() -> str:
+    return subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('ascii').strip()
+
+def get_git_branch() -> str:
+    return subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('ascii').strip()
+
+# state machine for display
 class DisplayState(StrEnum):
     TEMP = auto()
     PRESSURE = auto()
@@ -49,8 +67,7 @@ PROCESS_LOOP_DELAY_SEC = 0.5
 
 Readings = namedtuple("Readings", ["temp", "humidity", "pressure"])
 
-# Create single instance of sensehat object
-sense = SenseHat()
+
 
 
 def pushed_middle(event: InputEvent):
@@ -167,33 +184,78 @@ class CustomCollector(Collector):
         self.sense = sense
 
     def collect(self):
+        collector_info = GaugeMetricFamily(
+            "sense_hat_version_info",
+            "SenseHat Exporter version info",
+            labels=["version","branch", "commit"]
+        )
+        collector_info.add_metric([VERSION,get_git_branch(), get_git_revision_hash()],1)
+        yield collector_info
+        
+        temperature_calibration = GaugeMetricFamily(
+            "sense_hat_temperature_calibration",
+            "Temperature calibration offset",
+            value=TEMPERATURE_CALIBRATION,
+            unit="celsius"
+        )
+        yield temperature_calibration
+        
         temperature = GaugeMetricFamily(
             "sense_hat_temperature",
             "Sense hat temperature in °C",
-            labels=["sensor"],
+            labels=["sensor", "calibrated"],
             unit="celsius",
         )
         temperature.add_metric(
-            ["humidity"], value=self.sense.get_temperature_from_humidity()
+            ["humidity", "false"], value=self.sense.get_temperature_from_humidity()
         )
         temperature.add_metric(
-            ["pressure"], value=self.sense.get_temperature_from_pressure()
+            ["pressure", "false"], value=self.sense.get_temperature_from_pressure()
+        )
+        temperature.add_metric(
+            ["humidity", "true"], value=self.sense.get_temperature_from_humidity() + TEMPERATURE_CALIBRATION
+        )
+        temperature.add_metric(
+            ["pressure", "true"], value=self.sense.get_temperature_from_pressure() + TEMPERATURE_CALIBRATION
         )
         yield temperature
+        
+        pressure_calibration = GaugeMetricFamily(
+            "sense_hat_pressure_calibration",
+            "Pressure calibration offset",
+            value=PRESSURE_CALIBRATION,
+            unit="mbar"
+        )
+        yield pressure_calibration
+        
         pressure = GaugeMetricFamily(
             "sense_hat_pressure",
             "Sense Hat pressure in mb",
-            value=self.sense.get_pressure(),
+            labels=["calibrated"],
             unit="mbar",
         )
+        pressure.add_metric(["false"], value=self.sense.get_pressure())
+        pressure.add_metric(["true"], value=self.sense.get_pressure() + PRESSURE_CALIBRATION)
         yield pressure
+        
+        humidity_calibration = GaugeMetricFamily(
+            "sense_hat_humidity_calibration",
+            "Relative Humidity calibration offset",
+            value=HUMIDITY_CALIBRATION,
+            unit="percent"
+        )
+        yield humidity_calibration
+        
         humidity = GaugeMetricFamily(
             "sense_hat_relative_humidity",
             "Sense Hat Relative Humidity in %",
-            value=self.sense.get_humidity(),
+            labels=["calibrated"],
             unit="percent",
         )
+        humidity.add_metric(["false"], value=self.sense.get_humidity())
+        humidity.add_metric(["true"], value=self.sense.get_humidity() + HUMIDITY_CALIBRATION)
         yield humidity
+        
         orientation_degrees = GaugeMetricFamily(
             "sense_hat_orientation",
             "Sense Hat orientation in degrees",

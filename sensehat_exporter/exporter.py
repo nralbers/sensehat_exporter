@@ -21,7 +21,7 @@ sense = SenseHat()
 TEMPERATURE_CALIBRATION = float(os.environ.get("TEMPERATURE_CALIBRATION", "0.0"))
 PRESSURE_CALIBRATION = float(os.environ.get("PRESSURE_CALIBRATION", "0.0"))
 HUMIDITY_CALIBRATION = float(os.environ.get("HUMIDITY_CALIBRATION", "0.0"))
-VERSION = "v1.0.0"
+
 
 # Git stats for current project
 def get_git_revision_hash() -> str:
@@ -29,6 +29,9 @@ def get_git_revision_hash() -> str:
 
 def get_git_branch() -> str:
     return subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('ascii').strip()
+
+def get_tagged_version() -> str:
+    return subprocess.check_output(['git', 'describe', '--tags', '--abbrev=0']).decode('ascii').strip()
 
 # state machine for display
 class DisplayState(StrEnum):
@@ -189,7 +192,7 @@ class CustomCollector(Collector):
             "SenseHat Exporter version info",
             labels=["version","branch", "commit"]
         )
-        collector_info.add_metric([VERSION,get_git_branch(), get_git_revision_hash()],1)
+        collector_info.add_metric([get_tagged_version(),get_git_branch(), get_git_revision_hash()],1)
         yield collector_info
         
         temperature_calibration = GaugeMetricFamily(

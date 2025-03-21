@@ -33,6 +33,13 @@ def get_git_branch() -> str:
 def get_tagged_version() -> str:
     return subprocess.check_output(['git', 'describe', '--tags', '--abbrev=0']).decode('ascii').strip()
 
+# Get CPU temperature
+def get_cpu_temp_degrees() -> float:
+    with open('/sys/class/thermal/thermal_zone0/temp', 'r') as temp:
+        temperature = float(temp.read()) /1000
+    return temperature
+        
+
 # state machine for display
 class DisplayState(StrEnum):
     TEMP = auto()
@@ -258,6 +265,14 @@ class CustomCollector(Collector):
         humidity.add_metric(["false"], value=self.sense.get_humidity())
         humidity.add_metric(["true"], value=self.sense.get_humidity() + HUMIDITY_CALIBRATION)
         yield humidity
+        
+        cpu_temp = GaugeMetricFamily(
+            "sense_hat_rpi_cpu_temperature",
+            "Raspberry pi CPU temperature in celsius",
+            value=get_cpu_temp_degrees(),
+            unit="celsius"
+        )
+        yield cpu_temp
         
         orientation_degrees = GaugeMetricFamily(
             "sense_hat_orientation",

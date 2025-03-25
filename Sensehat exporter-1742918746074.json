@@ -1,0 +1,1442 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.5.2"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "panels": [],
+      "title": "Current values",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#fade2a",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 45,
+          "min": -23,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#27479c",
+                "value": null
+              },
+              {
+                "color": "#1462a9",
+                "value": -22
+              },
+              {
+                "color": "#1674b6",
+                "value": -15
+              },
+              {
+                "color": "#368ac7",
+                "value": -10
+              },
+              {
+                "color": "#3fa3da",
+                "value": -5
+              },
+              {
+                "color": "#4ec0ee",
+                "value": -2
+              },
+              {
+                "color": "#aedcd8",
+                "value": 1
+              },
+              {
+                "color": "#a8d6ad",
+                "value": 3
+              },
+              {
+                "color": "#9ed07f",
+                "value": 5
+              },
+              {
+                "color": "#aed352",
+                "value": 7
+              },
+              {
+                "color": "#d0d93e",
+                "value": 9
+              },
+              {
+                "color": "#fcde04",
+                "value": 11
+              },
+              {
+                "color": "#fbcb0c",
+                "value": 13
+              },
+              {
+                "color": "#fcb716",
+                "value": 15
+              },
+              {
+                "color": "#faa31a",
+                "value": 17
+              },
+              {
+                "color": "#f68a1f",
+                "value": 19
+              },
+              {
+                "color": "#f26a2f",
+                "value": 21
+              },
+              {
+                "color": "#ec513a",
+                "value": 25
+              },
+              {
+                "color": "#ed2a2a",
+                "value": 30
+              },
+              {
+                "color": "#c32027",
+                "value": 36
+              },
+              {
+                "color": "#9b1b1d",
+                "value": 41
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 2,
+        "x": 0,
+        "y": 1
+      },
+      "id": 12,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "sense_hat_temperature_celsius{calibrated=\"$calibration\", sensor=\"$humidty_or_pressure\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "interval": "",
+          "legendFormat": "Temperature sensor={{sensor}} calibrated={{calibrated}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Temperature",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 99,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#f10100",
+                "value": null
+              },
+              {
+                "color": "#c74011",
+                "value": 10
+              },
+              {
+                "color": "#c18441",
+                "value": 20
+              },
+              {
+                "color": "#37a13c",
+                "value": 30
+              },
+              {
+                "color": "#78ccbf",
+                "value": 40
+              },
+              {
+                "color": "#37afae",
+                "value": 50
+              },
+              {
+                "color": "#3a9eae",
+                "value": 60
+              },
+              {
+                "color": "#1295a9",
+                "value": 70
+              },
+              {
+                "color": "#3984ae",
+                "value": 80
+              },
+              {
+                "color": "#394774",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 2,
+        "x": 2,
+        "y": 1
+      },
+      "id": 10,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "quantile_over_time(0.5, sense_hat_relative_humidity_percent{calibrated=\"$calibration\"}[10m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "Relative humidity calibrated={{calibrated}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Relative humidity",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1080,
+          "min": 900,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#081030",
+                "value": null
+              },
+              {
+                "color": "#002060",
+                "value": 950
+              },
+              {
+                "color": "#003492",
+                "value": 976
+              },
+              {
+                "color": "#005a94",
+                "value": 986
+              },
+              {
+                "color": "#007592",
+                "value": 995
+              },
+              {
+                "color": "#1a8c93",
+                "value": 1002
+              },
+              {
+                "color": "#67a29b",
+                "value": 1007
+              },
+              {
+                "color": "#9bb7ac",
+                "value": 1011
+              },
+              {
+                "color": "#b6b6b6",
+                "value": 1013
+              },
+              {
+                "color": "#b0ae98",
+                "value": 1015
+              },
+              {
+                "color": "#a7936b",
+                "value": 1019
+              },
+              {
+                "color": "#a37443",
+                "value": 1024
+              },
+              {
+                "color": "#9f512c",
+                "value": 1030
+              },
+              {
+                "color": "#8e2f39",
+                "value": 1038
+              },
+              {
+                "color": "#6f1840",
+                "value": 1046
+              },
+              {
+                "color": "#300818",
+                "value": 1080
+              }
+            ]
+          },
+          "unit": "pressurehpa"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 2,
+        "x": 4,
+        "y": 1
+      },
+      "id": 13,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "quantile_over_time(0.5, sense_hat_pressure_mbar{instance=\"$pi\", calibrated=\"$calibration\"}[10m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "interval": "",
+          "legendFormat": "Pressure calibrated={{calibrated}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Pressure",
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 4,
+      "panels": [],
+      "title": "Trends",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#fade2a",
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "max": 45,
+          "min": -23,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#27479c",
+                "value": null
+              },
+              {
+                "color": "#1462a9",
+                "value": -22
+              },
+              {
+                "color": "#1674b6",
+                "value": -15
+              },
+              {
+                "color": "#368ac7",
+                "value": -10
+              },
+              {
+                "color": "#3fa3da",
+                "value": -5
+              },
+              {
+                "color": "#4ec0ee",
+                "value": -2
+              },
+              {
+                "color": "#aedcd8",
+                "value": 1
+              },
+              {
+                "color": "#a8d6ad",
+                "value": 3
+              },
+              {
+                "color": "#9ed07f",
+                "value": 5
+              },
+              {
+                "color": "#aed352",
+                "value": 7
+              },
+              {
+                "color": "#d0d93e",
+                "value": 9
+              },
+              {
+                "color": "#fcde04",
+                "value": 11
+              },
+              {
+                "color": "#fbcb0c",
+                "value": 13
+              },
+              {
+                "color": "#fcb716",
+                "value": 15
+              },
+              {
+                "color": "#faa31a",
+                "value": 17
+              },
+              {
+                "color": "#f68a1f",
+                "value": 19
+              },
+              {
+                "color": "#f26a2f",
+                "value": 21
+              },
+              {
+                "color": "#ec513a",
+                "value": 25
+              },
+              {
+                "color": "#ed2a2a",
+                "value": 30
+              },
+              {
+                "color": "#c32027",
+                "value": 36
+              },
+              {
+                "color": "#9b1b1d",
+                "value": 41
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 7,
+        "x": 0,
+        "y": 8
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "sense_hat_temperature_celsius{calibrated=\"$calibration\", sensor=\"$humidty_or_pressure\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "interval": "",
+          "legendFormat": "Temperature sensor={{sensor}} calibrated={{calibrated}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Temperature",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "max": 99,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#f10100",
+                "value": null
+              },
+              {
+                "color": "#c74011",
+                "value": 10
+              },
+              {
+                "color": "#c18441",
+                "value": 20
+              },
+              {
+                "color": "#37a13c",
+                "value": 30
+              },
+              {
+                "color": "#78ccbf",
+                "value": 40
+              },
+              {
+                "color": "#37afae",
+                "value": 50
+              },
+              {
+                "color": "#3a9eae",
+                "value": 60
+              },
+              {
+                "color": "#1295a9",
+                "value": 70
+              },
+              {
+                "color": "#3984ae",
+                "value": 80
+              },
+              {
+                "color": "#394774",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 7,
+        "x": 7,
+        "y": 8
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "quantile_over_time(0.5, sense_hat_relative_humidity_percent{calibrated=\"$calibration\"}[10m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "Relative humidity calibrated={{calibrated}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Relative humidity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "max": 1080,
+          "min": 900,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#081030",
+                "value": null
+              },
+              {
+                "color": "#002060",
+                "value": 950
+              },
+              {
+                "color": "#003492",
+                "value": 976
+              },
+              {
+                "color": "#005a94",
+                "value": 986
+              },
+              {
+                "color": "#007592",
+                "value": 995
+              },
+              {
+                "color": "#1a8c93",
+                "value": 1002
+              },
+              {
+                "color": "#67a29b",
+                "value": 1007
+              },
+              {
+                "color": "#9bb7ac",
+                "value": 1011
+              },
+              {
+                "color": "#b6b6b6",
+                "value": 1013
+              },
+              {
+                "color": "#b0ae98",
+                "value": 1015
+              },
+              {
+                "color": "#a7936b",
+                "value": 1019
+              },
+              {
+                "color": "#a37443",
+                "value": 1024
+              },
+              {
+                "color": "#9f512c",
+                "value": 1030
+              },
+              {
+                "color": "#8e2f39",
+                "value": 1038
+              },
+              {
+                "color": "#6f1840",
+                "value": 1046
+              },
+              {
+                "color": "#300818",
+                "value": 1080
+              }
+            ]
+          },
+          "unit": "pressurehpa"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 6,
+        "x": 14,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "quantile_over_time(0.5, sense_hat_pressure_mbar{instance=\"$pi\", calibrated=\"$calibration\"}[10m])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "interval": "",
+          "legendFormat": "Pressure calibrated={{calibrated}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Pressure",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 5,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds",
+                "seriesBy": "last"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "scheme",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 2,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "mappings": [],
+              "max": 20,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "#27479c",
+                    "value": null
+                  },
+                  {
+                    "color": "#1462a9",
+                    "value": -22
+                  },
+                  {
+                    "color": "#1674b6",
+                    "value": -15
+                  },
+                  {
+                    "color": "#368ac7",
+                    "value": -10
+                  },
+                  {
+                    "color": "#3fa3da",
+                    "value": -5
+                  },
+                  {
+                    "color": "#4ec0ee",
+                    "value": -2
+                  },
+                  {
+                    "color": "#aedcd8",
+                    "value": 1
+                  },
+                  {
+                    "color": "#a8d6ad",
+                    "value": 3
+                  },
+                  {
+                    "color": "#9ed07f",
+                    "value": 5
+                  },
+                  {
+                    "color": "#aed352",
+                    "value": 7
+                  },
+                  {
+                    "color": "#d0d93e",
+                    "value": 9
+                  },
+                  {
+                    "color": "#fcde04",
+                    "value": 11
+                  },
+                  {
+                    "color": "#fbcb0c",
+                    "value": 13
+                  },
+                  {
+                    "color": "#fcb716",
+                    "value": 15
+                  },
+                  {
+                    "color": "#faa31a",
+                    "value": 17
+                  },
+                  {
+                    "color": "#f68a1f",
+                    "value": 19
+                  },
+                  {
+                    "color": "#f26a2f",
+                    "value": 21
+                  },
+                  {
+                    "color": "#ec513a",
+                    "value": 25
+                  },
+                  {
+                    "color": "#ed2a2a",
+                    "value": 30
+                  },
+                  {
+                    "color": "#c32027",
+                    "value": 36
+                  },
+                  {
+                    "color": "#9b1b1d",
+                    "value": 41
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 7,
+            "x": 0,
+            "y": 15
+          },
+          "id": 2,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.5.2",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "avg_over_time(sense_hat_rpi_cpu_temperature_celsius{instance=\"$pi\"}[1h]) - ignoring(calibrated, sensor) quantile_over_time(0.5, sense_hat_temperature_celsius{calibrated=~\"$calibration\", instance=~\"$pi\", sensor=~\"$humidty_or_pressure\"}[1h])",
+              "format": "time_series",
+              "fullMetaSearch": false,
+              "hide": false,
+              "includeNullMetadata": true,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "CPU temp delta",
+              "range": true,
+              "refId": "CPU temp over environment",
+              "useBackend": false
+            }
+          ],
+          "title": "CPU-environment temperature delta",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "celsius"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 3,
+            "x": 7,
+            "y": 15
+          },
+          "id": 7,
+          "options": {
+            "colorMode": "none",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.5.2",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "sense_hat_temperature_calibration_celsius",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false,
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              }
+            }
+          ],
+          "title": "Temperature calibration value",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "pressurehpa"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 3,
+            "x": 10,
+            "y": 15
+          },
+          "id": 9,
+          "options": {
+            "colorMode": "none",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.5.2",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "sense_hat_pressure_calibration_mbar",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false,
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              }
+            }
+          ],
+          "title": "Pressure calibration value",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "decimals": 1,
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 3,
+            "x": 7,
+            "y": 19
+          },
+          "id": 8,
+          "options": {
+            "colorMode": "none",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.5.2",
+          "targets": [
+            {
+              "disableTextWrap": false,
+              "editorMode": "builder",
+              "expr": "sense_hat_humidity_calibration_percent",
+              "fullMetaSearch": false,
+              "includeNullMetadata": true,
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A",
+              "useBackend": false,
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              }
+            }
+          ],
+          "title": "Humidity calibration value",
+          "type": "stat"
+        }
+      ],
+      "title": "Calibration",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {},
+        "definition": "label_values(sense_hat_version_info,instance)",
+        "name": "pi",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(sense_hat_version_info,instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {},
+        "definition": "label_values(sense_hat_temperature_celsius,calibrated)",
+        "name": "calibration",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(sense_hat_temperature_celsius,calibrated)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {},
+        "definition": "label_values(sense_hat_temperature_celsius,sensor)",
+        "name": "humidty_or_pressure",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(sense_hat_temperature_celsius,sensor)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Sensehat exporter",
+  "uid": "begtpb6u1w9a8e",
+  "version": 11,
+  "weekStart": ""
+}

@@ -109,9 +109,9 @@ def pushed_right(event: InputEvent):
 
 
 def get_env_readings() -> Readings:
-    temp = sense.temperature
-    pressure = sense.pressure
-    humidity = sense.humidity
+    temp = sense.temperature + TEMPERATURE_CALIBRATION
+    pressure = sense.pressure + PRESSURE_CALIBRATION
+    humidity = sense.humidity + HUMIDITY_CALIBRATION
 
     return Readings(temp=temp, pressure=pressure, humidity=humidity)
 

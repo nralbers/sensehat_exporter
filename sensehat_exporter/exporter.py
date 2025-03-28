@@ -290,11 +290,12 @@ class CustomCollector(Collector):
             orientation_degrees.add_metric(
                 [axis], value=self.sense.get_orientation_degrees()[axis]
             )
-            yield orientation_degrees
+            
             orientation_radians.add_metric(
                 [axis], value=self.sense.get_orientation_radians()[axis]
-            )
-            yield orientation_radians
+            )    
+        yield orientation_degrees
+        yield orientation_radians
 
 
 async def displayloop():

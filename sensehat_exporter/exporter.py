@@ -300,6 +300,7 @@ class CustomCollector(Collector):
 
 async def displayloop():
     sense.low_light = True
+    sense.clear()
     RUNNING = True
     while RUNNING:
         readings = get_env_readings()
